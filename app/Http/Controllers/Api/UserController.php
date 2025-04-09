@@ -7,7 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Services\UserService;
+use App\Http\Services\UserService;
 
 class UserController extends Controller
 {
@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $user = $this->userService->create($request);
+        $user = $this->userService->create($request->all());
         return new UserResource($user);
     }
 

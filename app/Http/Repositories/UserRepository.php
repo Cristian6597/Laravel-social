@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Http\Repositories;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserRepository
@@ -22,5 +23,17 @@ class UserRepository
 
         // Crea e restituisce l'utente
         return User::create($data);
+    }
+    public function delete(User $user)
+    {
+        $user->delete();
+        return response()->json([
+            'message' => 'Utente cancellato con successo.'
+        ], 200);
+    }
+    public function update(Request $request, User $user)
+    {
+        $user->update($request->all());
+        return $user;
     }
 }

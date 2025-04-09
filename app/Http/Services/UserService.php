@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Http\Services;
 
-use App\Repositories\UserRepository;
+use App\Models\User;
+use App\Http\Repositories\UserRepository;
+use Illuminate\Http\Request;
 
 class UserService
 {
@@ -30,5 +32,16 @@ class UserService
     {
         // Passa i dati alla Repository per gestire la creazione dell'utente
         return $this->userRepository->create($data);
+    }
+
+    public function delete(User $user)
+    {
+        return $this->userRepository->delete($user);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $user = $this->userRepository->update($request, $user);
+        return $user;
     }
 }
